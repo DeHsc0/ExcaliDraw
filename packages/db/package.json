@@ -1,0 +1,17 @@
+{
+    "name": "@repo/db",
+    "version": "0.0.0",
+    "scripts": {
+        "db:generate": "pnpm prisma generate",
+        "db:migrate": "pnpm prisma migrate dev --skip-generate"
+    },
+    "devDependencies": {
+        "@repo/typescript-config" : "workspace:*",
+        "@prisma/client": "^6.2.1",
+        "prisma": "^6.2.1"
+    },
+    "exports" : {
+        "./client" : "./src/client.ts",
+        "." : "./src/index.ts"
+    }
+}
