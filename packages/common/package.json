@@ -14,7 +14,7 @@
   "license": "ISC",
   "description": "",
   "exports": {
-    "./jwtSecret": "./src/jwt.ts",
-    "./zod" : "./src/index.ts"
+    "./jwtSecret": "./src/secret.ts",
+    "./zod" : "./src/zod.ts"
   }
 }

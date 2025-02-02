@@ -10,8 +10,13 @@ export const createRoom = async (req : Request , res : Response) => {
         const validData = roomScheam.parse(req.body)
         const room = await prisma.room.create({
             data :{
-                slug : validData.name,
+                slug : validData.slug,
                 adminId : req.id as string,
+                participants : {
+                    connect : {
+                        id : req.id
+                    }
+                }
             },
         })
         res.status(201).json({
@@ -24,7 +29,7 @@ export const createRoom = async (req : Request , res : Response) => {
                 message : "Room already exists"
             })
         }else if(e instanceof z.ZodError){
-            res.status(400).send(e.errors[0])
+            res.status(400).send(e.issues[0])
         } 
         else {
             res.status(500).json({

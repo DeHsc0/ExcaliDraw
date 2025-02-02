@@ -1,7 +1,7 @@
 import z from "zod"
 
 const roomScheam = z.object({
-    name : z.string().max(20).min(3)
+    slug : z.string().max(20).min(3)
 })
 
 const loginSchema = z.object({
@@ -15,7 +15,14 @@ const signupSchema = z.object({
     email : z.string().email()        
 })
 
+const messageSchema = z.object({
+    type  : z.string().max(15),
+    roomId : z.string().min(30),
+    message : z.string().optional()
+})
+
 export {
+    messageSchema,
     loginSchema, 
     signupSchema, 
     roomScheam
