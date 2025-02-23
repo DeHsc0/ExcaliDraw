@@ -1,10 +1,9 @@
-import Image from "next/image";
-import Canvas from "@/components/Canvas/Canvas";
+"use client"
 
 export default function Home() {
+
   return (
     <div>
-      <Canvas />
     </div>
-  );
+  )
 }

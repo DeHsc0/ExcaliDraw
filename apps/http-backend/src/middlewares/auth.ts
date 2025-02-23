@@ -1,7 +1,7 @@
 
 import { NextFunction, Request , Response } from "express" 
 import jwt from "jsonwebtoken"
-import { JWT_SECRET } from "@repo/common/jwtSecret"
+import { JWT_SECRET } from "@repo/common/secrets"
 
 export const auth = async ( req : Request , res : Response , next : NextFunction) =>{
     try{

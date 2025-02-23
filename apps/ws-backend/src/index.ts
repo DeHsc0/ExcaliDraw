@@ -1,10 +1,10 @@
-//1:56
- // error handling with status codes 
+
+ // TODO : error handling   
 
 
 import jwt, { JwtPayload } from "jsonwebtoken"
-import WebSocket , { WebSocketServer } from "ws";
-import { JWT_SECRET } from "@repo/common/jwtSecret";
+import WebSocket , { WebSocketServer } from "ws"
+import { JWT_SECRET } from "@repo/common/secrets"
 import { messageSchema } from "@repo/common/zod"
 import  prisma from "@repo/db/client"
 
@@ -14,7 +14,7 @@ function checkUserId (token : string) : string | null {
     try{
         const decoded = jwt.verify(token , JWT_SECRET) as JwtPayload
     if(typeof decoded === "string" && !decoded || !decoded.id){
-        return null;
+        return null
     } else {
         return decoded.id
     }

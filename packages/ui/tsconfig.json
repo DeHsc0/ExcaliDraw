@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["src", "../../apps/excalidraw-frontend/components", "../../apps/excalidraw-frontend/app/hooks"],
   "exclude": ["node_modules", "dist"]
 }
