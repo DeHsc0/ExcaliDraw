@@ -36,7 +36,6 @@ export default function Dashboard() {
             const response = await axios.get("http://localhost:3001/get-all-rooms", {
                 withCredentials: true
             })
-            console.log(response)
             return response.data
         } catch (error) {
             console.error("Error fetching rooms:", error)

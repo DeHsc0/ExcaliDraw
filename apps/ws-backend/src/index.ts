@@ -76,27 +76,27 @@ wss.on("connection" , function connection(ws , request){
                 
                 const roomExists = await prisma.room.findUnique({
                     where: { id: validData.data.roomId }
-                });
+                })
                 
                 if (!roomExists) {
                     ws.send(JSON.stringify({
                         type: "error",
                         message: "Room does not exist"
-                    }));
-                    return;
+                    }))
+                    return
                 }
                 
                
                 const userExists = await prisma.user.findUnique({
                     where: { id: userId }
-                });
+                })
                 
                 if (!userExists) {
                     ws.send(JSON.stringify({
                         type: "error",
                         message: "User does not exist in database"
-                    }));
-                    return;
+                    }))
+                    return
                 }
                 
                 const existsInRoom = user.rooms.includes(validData.data.roomId)

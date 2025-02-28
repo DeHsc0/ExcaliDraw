@@ -1,6 +1,6 @@
 
-import { Router } from "express";
-import { auth } from "../middlewares/auth";
+import { Router } from "express"
+import { auth } from "../middlewares/auth"
 import { getRoomShapes } from "../controllers/getRoomShapes"
 
 const router : Router = Router()

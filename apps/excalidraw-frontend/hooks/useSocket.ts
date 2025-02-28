@@ -34,7 +34,7 @@ export default function useSocket(cookie : string) {
                 const parsedMsg : ParsedMsg = JSON.parse(msg.data)
                 const shapesData : ShapesData = JSON.parse(parsedMsg.state)
                 if(shapesData.shapes.length < 0 || shapesData.shapes.length === 0)return
-                console.log(shapesData.shapes)
+                
                 setRecievedShapes((prev) => [...prev , ...shapesData.shapes])
             }
             catch(e){

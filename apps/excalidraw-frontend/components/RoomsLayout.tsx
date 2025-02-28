@@ -1,7 +1,7 @@
-import { Copy, Crown, PenBox, Plus, Users, X } from "lucide-react";
-import { motion, useAnimation } from "framer-motion";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { Copy, Crown, PenBox, Plus, Users, X } from "lucide-react"
+import { motion, useAnimation } from "framer-motion"
+import axios from "axios"
+import { useState, useEffect } from "react"
 
 interface RoomData {
     id: string

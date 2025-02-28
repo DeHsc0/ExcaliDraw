@@ -1,10 +1,10 @@
 
-import { Response , Request } from "express";
-import z from "zod";
+import { Response , Request } from "express"
+import z from "zod"
 import bcrypt from "bcrypt"
 import { Prisma} from "@repo/db"
 import prisma from "@repo/db/client"
-import jwt  from "jsonwebtoken";
+import jwt  from "jsonwebtoken"
 import { JWT_SECRET } from "@repo/common/secrets"
 import { loginSchema } from "@repo/common/zod"
 

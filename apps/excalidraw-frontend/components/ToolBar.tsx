@@ -1,4 +1,4 @@
-import { ToolbarProps } from "../types/types";
+import { ToolbarProps } from "../types/types"
 
 export default function Toolbar({ drawingMode, setDrawingMode }: ToolbarProps){
     return (

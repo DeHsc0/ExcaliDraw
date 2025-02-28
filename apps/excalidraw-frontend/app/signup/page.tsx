@@ -34,25 +34,25 @@ export default function Signup() {
     }
 
     useEffect(() => {
-      if (!alert) return;
+      if (!alert) return
     
       controls.start({
         translateY: "0px"
       }).then(() => {
 
-        return new Promise((resolve) => setTimeout(resolve, 1000));
+        return new Promise((resolve) => setTimeout(resolve, 1000))
       }).then(() => {
 
         return controls.start({
           translateY: "-100px",
           scale: 1,
-        });
+        })
       }).then(() => {
 
-        setAlert(null);
-      });
+        setAlert(null)
+      })
     
-    }, [alert, controls]);
+    }, [alert, controls])
 
   return (        
     <div>

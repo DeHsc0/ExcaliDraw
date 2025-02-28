@@ -18,16 +18,16 @@ export default function CanvasPage(){
     function extractJwtFromCookie(cookieString: string): string | undefined {
             
             if (cookieString.startsWith("cookie=")) {
-                return cookieString.substring(7); 
+                return cookieString.substring(7) 
             }
             
-            const parts = cookieString.split('=');
+            const parts = cookieString.split('=')
             
             if (parts.length >= 2) {
-                return parts[1];
+                return parts[1]
             }
             
-            return undefined;
+            return undefined
         }
         
         useEffect(() => {
@@ -58,7 +58,6 @@ export default function CanvasPage(){
         }
         
     if(!cookie || !roomId || Array.isArray(roomId) || !roomShapes){
-        console.log(roomShapes)
         return
     }
     return (

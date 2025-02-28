@@ -1,5 +1,5 @@
-import prisma from "@repo/db/client";
-import { Request, Response } from "express";
+import prisma from "@repo/db/client"
+import { Request, Response } from "express"
 
 
 export const getRooms = async  (req : Request , res : Response) => {

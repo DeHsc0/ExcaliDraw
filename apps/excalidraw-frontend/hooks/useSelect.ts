@@ -9,15 +9,15 @@ export default function useSelect() {
     const selectShape = (offsetX: number, offsetY: number, shapes: Shape[]) => {
         let shapeSelected = false
 
-        for (let i = shapes.length - 1; i >= 0; i--) {
+        for (let i = shapes.length - 1 i >= 0 i--) {
             const shape = shapes[i]
             if(!shape)return
             if (shape.type === "rect") {
                 if (!shape.width || !shape.height || !shape.style) continue
-                const minX = Math.min(shape.x, shape.x + shape.width);
-                const maxX = Math.max(shape.x, shape.x + shape.width);
-                const minY = Math.min(shape.y, shape.y + shape.height);
-                const maxY = Math.max(shape.y, shape.y + shape.height);
+                const minX = Math.min(shape.x, shape.x + shape.width)
+                const maxX = Math.max(shape.x, shape.x + shape.width)
+                const minY = Math.min(shape.y, shape.y + shape.height)
+                const maxY = Math.max(shape.y, shape.y + shape.height)
                 if (
                     offsetX >= minX &&
                     offsetX <= maxX &&

@@ -6,7 +6,7 @@ import Toolbar from "./ToolBar"
 import { drawAllShapes} from "../utils/drawUtils"
 import useSelect from "../hooks/useSelect"
 import useSocket from "../hooks/useSocket"
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "framer-motion"
 
 interface Data {
     token : string
@@ -57,22 +57,22 @@ export default function Canvas({token , roomId , state } : Data){
             state: JSON.stringify({
                 shapes: savedShapes.current
             })
-        });
-    }, [roomId]);
+        })
+    }, [roomId])
 
     useEffect(() => {
         const handleBeforeUnload = () => {
             if (socket && socket.readyState === WebSocket.OPEN) {
-                sendMessage(prepareStateMessage());
+                sendMessage(prepareStateMessage())
             }
-        };
+        }
         
-        window.addEventListener('beforeunload', handleBeforeUnload);
+        window.addEventListener('beforeunload', handleBeforeUnload)
         
         return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, [socket, prepareStateMessage, sendMessage]);
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+        }
+    }, [socket, prepareStateMessage, sendMessage])
 
     useEffect(() => {
         if (!alert) return

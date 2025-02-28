@@ -1,7 +1,7 @@
 "use client"
 
-import { ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export default function HowItWorks() {
   const router = useRouter()
@@ -18,5 +18,5 @@ export default function HowItWorks() {
         </button>
       </div>
     </div>
-  );
+  )
 }
