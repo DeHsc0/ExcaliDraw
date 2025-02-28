@@ -2,15 +2,26 @@ import { useEffect, useCallback, useState } from 'react'
 import { Shape } from '../types/types'
 import {WS_URL} from "@repo/common/secrets"
 
-export default function useSocket() {
+export default function useSocket(cookie : string) {
+
+    interface ParsedMsg {
+        type : string,
+        roomId : string,
+        state : string
+    }
+
+    interface ShapesData {
+        shapes : Shape[]
+    }
 
     const [receivedShapes , setRecievedShapes ] = useState<Shape[]>([])
+    const [receivedMsg , setRecievedMsg] = useState<string | undefined>(undefined)
     
     const [socket, setSocket] = useState<WebSocket | null>(null)
     
     useEffect(() => {
 
-        const ws = new WebSocket(WS_URL)
+        const ws = new WebSocket(`${WS_URL}?token=${cookie}`)
         
         ws.onopen = () => {
             console.log('WebSocket connected')
@@ -18,11 +29,17 @@ export default function useSocket() {
         }
         
         ws.onmessage = (msg) => {
-            if(!msg)return 
-            const parsedMsg = JSON.parse(msg.data)
-            if(!parsedMsg.message)return 
-            if(receivedShapes === parsedMsg.message)return
-            setRecievedShapes((prev) => [...prev , ...parsedMsg.message])
+            try{
+                if(!msg)return 
+                const parsedMsg : ParsedMsg = JSON.parse(msg.data)
+                const shapesData : ShapesData = JSON.parse(parsedMsg.state)
+                if(shapesData.shapes.length < 0 || shapesData.shapes.length === 0)return
+                console.log(shapesData.shapes)
+                setRecievedShapes((prev) => [...prev , ...shapesData.shapes])
+            }
+            catch(e){
+                return
+            }
 
         }
 
@@ -47,8 +64,7 @@ export default function useSocket() {
             console.log('WebSocket is not open')
         }
         
-
     }, [socket])
 
-    return { sendMessage , receivedShapes}
+    return { sendMessage , receivedShapes , receivedMsg , socket }
 }

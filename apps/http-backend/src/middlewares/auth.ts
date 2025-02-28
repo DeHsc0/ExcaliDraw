@@ -14,6 +14,6 @@ export const auth = async ( req : Request , res : Response , next : NextFunction
         }
     }
     catch(e){
-            res.status(403).send("Unauthorized")
+            res.status(403).send(req.cookies)
         }
     }

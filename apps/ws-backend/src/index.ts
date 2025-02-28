@@ -1,7 +1,4 @@
 
- // TODO : error handling   
-
-
 import jwt, { JwtPayload } from "jsonwebtoken"
 import WebSocket , { WebSocketServer } from "ws"
 import { JWT_SECRET } from "@repo/common/secrets"
@@ -48,7 +45,9 @@ wss.on("connection" , function connection(ws , request){
         ws.close() 
         return null
     }   
+
     
+        
     users.push({
         userId,
         ws,
@@ -65,7 +64,6 @@ wss.on("connection" , function connection(ws , request){
         
         const validData = messageSchema.safeParse(parsedData)
         if(!validData.success){
-            ws.close()
             return
         }
         if(validData.data.type === "join-room"){
@@ -75,6 +73,32 @@ wss.on("connection" , function connection(ws , request){
                     ws.close()
                     return
                 }
+                
+                const roomExists = await prisma.room.findUnique({
+                    where: { id: validData.data.roomId }
+                });
+                
+                if (!roomExists) {
+                    ws.send(JSON.stringify({
+                        type: "error",
+                        message: "Room does not exist"
+                    }));
+                    return;
+                }
+                
+               
+                const userExists = await prisma.user.findUnique({
+                    where: { id: userId }
+                });
+                
+                if (!userExists) {
+                    ws.send(JSON.stringify({
+                        type: "error",
+                        message: "User does not exist in database"
+                    }));
+                    return;
+                }
+                
                 const existsInRoom = user.rooms.includes(validData.data.roomId)
                 if(existsInRoom){
                     ws.send("User Already Exists in the room")
@@ -83,14 +107,14 @@ wss.on("connection" , function connection(ws , request){
                     const room = await prisma.room.update({
                         where : {
                             id : validData.data.roomId 
-                        } , 
+                        }, 
                         data : {
                             participants : {
                                 connect : {
                                     id : userId
                                 }
                             }
-                        } , 
+                        }, 
                         select : {
                             participants : true
                         }
@@ -151,28 +175,18 @@ wss.on("connection" , function connection(ws , request){
                 }
                 const existsInRoom = user.rooms.includes(validData.data.roomId)
                 if(existsInRoom){
-                    const chat = await prisma.chat.create({
-                        data : {
-                            userId : userId,
-                            roomId : validData.data.roomId,
-                            message : validData.data.message as string
-                        }, 
-                        select : {
-                            roomId : true,
-                            message : true
-                        }
-                    })
-                    users.forEach((user) =>{
-                        if(user.rooms.includes(validData.data.roomId)){
-                            user.ws.send(JSON.stringify({
+                    users.forEach((otherUser) =>{
+                       
+                        if(otherUser.rooms.includes(validData.data.roomId) && otherUser.userId !== user.userId){
+                            otherUser.ws.send(JSON.stringify({
                                 type : "chat",
-                                message : chat.message,
-                                roomId : chat.roomId
+                                state : validData.data.state,
+                                roomId : validData.data.roomId
                             }))                 
                         }
                     })
-                }else {
-                    ws.send("User Dosen't exisits in that room ")
+                } else {
+                    ws.send("User Doesn't exist in that room")
                 }
             }
             catch(e){
@@ -181,9 +195,48 @@ wss.on("connection" , function connection(ws , request){
                     message : e
                 }))
             }  
-        } else {
-            ws.send("invalid Type")
-        }        
+        }      
+        else if(validData.data.type === "save"){
+            try{
+                const user = users.find(x => x.ws === ws)
+                if(!user){
+                    ws.close()
+                    return
+                }
+            const existsInRoom = user.rooms.includes(validData.data.roomId)
+            
+            if(existsInRoom){
+                const response = await prisma.room.update({
+                    where : {
+                        id : validData.data.roomId
+                    },
+                    data : {
+                        state : validData.data.state
+                    },
+                    select : {
+                        id : true,
+                        state : true
+                    }
+                })
+
+                users.map((user) => {
+                    user.ws.send(JSON.stringify({
+                        response,
+                        validData
+                    }))
+                })
+
+            } else {
+                ws.send("User Doesn't exist in that room")
+                }
+            }
+            catch(e){
+                console.error(e)
+            }
+
+                        
+            
+        }
     })
 
 })

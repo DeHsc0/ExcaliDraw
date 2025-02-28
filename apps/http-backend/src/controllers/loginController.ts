@@ -21,10 +21,15 @@ export const login = async (req : Request, res : Response) => {
                 password : true
             }
         })
-        const hashedPass = await bcrypt.compare(validUserData.password , user?.password)
+        const hashedPass = await bcrypt.compare(validUserData.password , user.password)
         if(hashedPass){
             const token = jwt.sign({id : user.id} , JWT_SECRET )
-            res.cookie("cookie" , token )
+            res.cookie("cookie" , token , { 
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+                maxAge: 86400000, // 1 day
+                domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined
+            })
             res.status(200).json({
                 message : "Login Successfull"
             }) 

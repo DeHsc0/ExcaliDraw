@@ -11,6 +11,7 @@ export const createRoom = async (req : Request , res : Response) => {
         const room = await prisma.room.create({
             data :{
                 slug : validData.slug,
+                description : validData.description,
                 adminId : req.id as string,
                 participants : {
                     connect : {
@@ -18,8 +19,16 @@ export const createRoom = async (req : Request , res : Response) => {
                     }
                 }
             },
+            select : {
+                id : true,
+                slug : true,
+                participants : true,
+                description : true,
+                adminId : true
+            }
         })
         res.status(201).json({
+            roomData : room,
             message : "Room has been created Successfully"
         })
     }

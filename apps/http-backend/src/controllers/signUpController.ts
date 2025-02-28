@@ -29,7 +29,9 @@ export const SignUpController = async (req : Request , res : Response) => {
                 message : "User already exists"
             })            
         } else if (e instanceof z.ZodError){
-            res.status(400).send(e.errors[0])
+            res.status(400).json({
+                message : "invalid input"
+            }) 
         } else {
             res.status(500).json({
                 message : "Internal Server Error"
