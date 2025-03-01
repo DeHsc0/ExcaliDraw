@@ -11,16 +11,23 @@ import { motion, useAnimation } from "framer-motion"
 interface Data {
     token : string
     roomId : string
-    state : string 
+    state : string
+    size ?: string
 }
 
 interface LastShapes {
     shapes : Shape[]
 }
 
-export default function Canvas({token , roomId , state } : Data){
+export default function Canvas({token , roomId , state , size} : Data){
 
-    const [lastShapes , setLastShapes ] = useState<LastShapes | undefined>(JSON.parse(state))
+    const [lastShapes , setLastShapes ] = useState<LastShapes | undefined>(() => {
+        if(JSON.parse(state)){
+            return JSON.parse(state)
+        } else{
+            return ""
+        }
+    })    
 
     const [drawingMode, setDrawingMode] = useState<DrawingMode>("select")
 
@@ -76,7 +83,6 @@ export default function Canvas({token , roomId , state } : Data){
 
     useEffect(() => {
         if (!alert) return
-        
         controls.start({
             translateY: "0px"
         }).then(() => {
@@ -101,9 +107,12 @@ export default function Canvas({token , roomId , state } : Data){
 
     
     useEffect(() => {
-        if(!receivedMsg)return 
-        setAlert(() => receivedMsg)
-    } , [receivedMsg])
+        if(socket && socket.readyState === WebSocket.OPEN){
+            if(!receivedMsg)return  
+
+            setAlert(() => receivedMsg)
+        }
+    } , [receivedMsg , socket])
 
     useEffect(() => {
         if(!ctxRef.current || !currentShape)return
@@ -210,7 +219,7 @@ export default function Canvas({token , roomId , state } : Data){
             </div>
         <Toolbar drawingMode={drawingMode} setDrawingMode={setDrawingMode} />
         <canvas
-          className="relative h-full w-full"
+          className={`relative ${size ? `${size}` : "h-full w-full" }`}
           ref={canvasRef}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}

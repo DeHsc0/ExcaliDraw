@@ -12,7 +12,7 @@ export default function HowItWorks() {
         <p className="text-zinc-400 text-lg max-w-xl text-center">
           Join Thousands of artists and teams who are already creating amazing artwork together
         </p>
-        <button onClick={() => {router.push("/login")}} className="group bg-sky-500 px-8 py-4 text-sm rounded-3xl flex items-center hover:bg-sky-600 transition-colors">
+        <button onClick={() => {router.push("/signup")}} className="group bg-sky-500 px-8 py-4 text-sm rounded-3xl flex items-center hover:bg-sky-600 transition-colors">
           Get Started Now
           <ArrowRight className="transition-transform group-hover:translate-x-2" />
         </button>

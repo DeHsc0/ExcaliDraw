@@ -25,7 +25,7 @@ export default function NavBar(){
           <a className="text-zinc-400 hover:text-white" href="">Features</a>
           <a className="text-zinc-400 hover:text-white" href="">How it works</a>
           <a className="text-zinc-400 hover:text-white" href="">Pricing</a>
-          <button onClick={() => {router.push("/login")}} className="bg-sky-500 px-4 py-2 rounded-3xl hover:bg-sky-600 duration-200">Get Started</button>
+          <button onClick={() => {router.push("/signup")}} className="bg-sky-500 px-4 py-2 rounded-3xl hover:bg-sky-600 duration-200">Get Started</button>
         </div>
       </nav>
     )

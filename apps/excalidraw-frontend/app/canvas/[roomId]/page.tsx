@@ -60,6 +60,9 @@ export default function CanvasPage(){
     if(!cookie || !roomId || Array.isArray(roomId) || !roomShapes){
         return
     }
+
+    console.log(roomShapes)
+
     return (
     <Canvas token={cookie} roomId={roomId} state={roomShapes.state} />
     )

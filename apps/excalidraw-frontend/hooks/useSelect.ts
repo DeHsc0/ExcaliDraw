@@ -9,7 +9,7 @@ export default function useSelect() {
     const selectShape = (offsetX: number, offsetY: number, shapes: Shape[]) => {
         let shapeSelected = false
 
-        for (let i = shapes.length - 1 i >= 0 i--) {
+        for (let i = shapes.length - 1 ; i >= 0 ; i--) {
             const shape = shapes[i]
             if(!shape)return
             if (shape.type === "rect") {

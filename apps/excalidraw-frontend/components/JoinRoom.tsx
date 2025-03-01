@@ -27,8 +27,7 @@ export default function JoinRoom() {
                     type="text" placeholder="Enter room code" className="flex-1 bg-slate-900 border border-slate-700 rounded-3xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"/>
                     <button
                     onClick={() => {
-                        
-                        
+                        router.push(`/canvas/${roomId}`)                        
                     }} 
                     className="bg-sky-500 text-white px-6 py-2 rounded-3xl flex items-center gap-2 hover:bg-sky-600 transition-colors group">
                         Join Room

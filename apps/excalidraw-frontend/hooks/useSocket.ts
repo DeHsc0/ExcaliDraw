@@ -7,7 +7,8 @@ export default function useSocket(cookie : string) {
     interface ParsedMsg {
         type : string,
         roomId : string,
-        state : string
+        state : string,
+        message ?: string
     }
 
     interface ShapesData {
@@ -32,10 +33,14 @@ export default function useSocket(cookie : string) {
             try{
                 if(!msg)return 
                 const parsedMsg : ParsedMsg = JSON.parse(msg.data)
-                const shapesData : ShapesData = JSON.parse(parsedMsg.state)
+                if(!parsedMsg.message){
+                    const shapesData : ShapesData = JSON.parse(parsedMsg.state)
                 if(shapesData.shapes.length < 0 || shapesData.shapes.length === 0)return
                 
-                setRecievedShapes((prev) => [...prev , ...shapesData.shapes])
+                setRecievedShapes((prev) => [...prev , ...shapesData.shapes])                    
+                } else {
+                    setRecievedMsg(() => parsedMsg.message)
+                }
             }
             catch(e){
                 return

@@ -101,7 +101,9 @@ wss.on("connection" , function connection(ws , request){
                 
                 const existsInRoom = user.rooms.includes(validData.data.roomId)
                 if(existsInRoom){
-                    ws.send("User Already Exists in the room")
+                    ws.send(JSON.stringify({
+                        message : "User Already Exists in the room"
+                    }))
                 } else {
                     user?.rooms.push(validData.data.roomId)
                     const room = await prisma.room.update({
@@ -119,7 +121,9 @@ wss.on("connection" , function connection(ws , request){
                             participants : true
                         }
                     }) 
-                    ws.send("User joined the room Successfully")
+                    ws.send(JSON.stringify({
+                        message : "User joined the room Successfully"
+                    }))
                 }
             }
             catch(e){
@@ -154,9 +158,13 @@ wss.on("connection" , function connection(ws , request){
                         participants : true
                     }
                 })
-                ws.send("Success")
+                ws.send(JSON.stringify({
+                    message : "Success"
+                }))
             } else{
-                ws.send("Something went wrong")
+                ws.send(JSON.stringify({
+                    message : "Something went wrong"
+                }))
             }
             }
             catch(e){
@@ -186,7 +194,9 @@ wss.on("connection" , function connection(ws , request){
                         }
                     })
                 } else {
-                    ws.send("User Doesn't exist in that room")
+                    ws.send(JSON.stringify({
+                        message : "User Doesn't exist in that room"
+                    }))
                 }
             }
             catch(e){
@@ -227,14 +237,14 @@ wss.on("connection" , function connection(ws , request){
                 })
 
             } else {
-                ws.send("User Doesn't exist in that room")
+                ws.send(JSON.stringify({
+                    message : "User Doesn't exist in that room"
+                }))
                 }
             }
             catch(e){
                 console.error(e)
-            }
-
-                        
+            }                     
             
         }
     })

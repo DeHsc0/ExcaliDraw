@@ -1,14 +1,15 @@
 "use client"
 
 import { motion , AnimatePresence } from "framer-motion"
-import {ChevronRight , Github} from "lucide-react"
+import {ChevronRight , Circle, Diamond, Github, Minus, MousePointer2, MoveUp, Square} from "lucide-react"
 import {useRouter} from "next/navigation"
+import  ToolBar  from "../components/ToolBar"
+import Canvas from "./Canvas"
 
 export default function Hero(){
     const router = useRouter()
   return (
     <div className="px-24 py-6 flex justify-between">
-        <AnimatePresence>
             <motion.div
                 initial={{
                     translateY : "60px",
@@ -48,16 +49,40 @@ export default function Hero(){
                     </button>
                     </div>
             </motion.div>
+            <div 
+            onClick={() => {
+                router.push("/signup")
+            }}
+            className=" w-[500px] group overflow-hidden border-2 flex justify-center items-center bg-zinc-900 rounded-2xl relative">
+                <div className="absolute top-4 z-0">
+                    <div className="rounded-lg p-2 border-2 grid-cols-1 border-gray-600 bg-zinc-800">
+                    <button className="p-2 rounded-lg text-blue-500"> 
+                        <Diamond />
+                    </button>
+                    <button className="p-2 rounded-lg text-blue-500"> 
+                        <Square />
+                    </button>
+                    <button className="p-2 rounded-lg text-blue-500"> 
+                        <Circle />
+                    </button>
+                    <button className="p-2 rounded-lg text-blue-500">
+                        <MoveUp />
+                    </button>
+                    <button className="p-2 rounded-lg text-blue-500">
+                        <Minus/>
+                    </button>
+                    <button className="p-2 rounded-lg text-blue-500">
+                        <MousePointer2 />
+                    </button>
+                    </div>
+                </div>
+                
+                <div className="absolute inset-0 bg-zinc-900 bg-opacity-20 backdrop-blur-sm"></div>
+                <div className="z-10 text-center">
+                    <h2 className="text-2xl text-gray-400 group-hover:text-white duration-300 mb-2">Click here to get started</h2>
+                </div>
+    </div>
 
-        </AnimatePresence>
-      <div className="w-[500px] h-[400px] border-2 bg-slate-800 rounded-2xl flex">
-        <AnimatePresence>
-            <motion.canvas
-                className="h-fit w-fit relative z-10">
-          {/* Put the canvas component here */}
-            </motion.canvas>
-        </AnimatePresence>
-      </div>
     </div>
   )
 }

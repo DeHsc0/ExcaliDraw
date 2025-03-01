@@ -2,7 +2,6 @@
 
 import { motion, useAnimation } from "framer-motion"
 import { ArrowLeft, UserPlus } from "lucide-react"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -82,10 +81,10 @@ export default function Signup() {
             <motion.div
               whileHover={{ x: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
+              onClick={() => {router.push("/")}}
             >
-              <Link href="/">
                 <ArrowLeft className="text-sky-500" />
-              </Link>
+              
             </motion.div>
             <h1 className="text-2xl font-bold text-white">Create Account</h1>
           </div>
