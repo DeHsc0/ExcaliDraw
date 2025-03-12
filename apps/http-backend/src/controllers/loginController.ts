@@ -27,8 +27,7 @@ export const login = async (req : Request, res : Response) => {
             res.cookie("cookie" , token , { 
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-                maxAge: 86400000, // 1 day
-                domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined
+                maxAge :  30 * 24 * 60 * 60
             })
             res.status(200).json({
                 message : "Login Successfull"
