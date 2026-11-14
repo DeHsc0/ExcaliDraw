@@ -3,7 +3,8 @@
     "version": "0.0.0",
     "scripts": {
         "db:generate": "pnpm prisma generate",
-        "db:migrate": "pnpm prisma migrate dev --skip-generate"
+        "db:migrate": "pnpm prisma migrate dev --skip-generate",
+        "build" : "pnpm build && pnpm run db:generate"
     },
     "devDependencies": {
         "@repo/typescript-config" : "workspace:*",
