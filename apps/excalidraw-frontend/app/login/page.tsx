@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { ArrowLeft, LogIn } from "lucide-react"
 import axios from "axios"
 import { useState , useEffect} from "react"
+import { BACKEND_URL } from "@repo/common/secrets"
 
 export default function Login() {
   const router = useRouter()
@@ -18,7 +19,7 @@ export default function Login() {
   const handleOnClick = async (event : React.MouseEvent) => {
     event.preventDefault()
       try{
-        const response = await axios.post("http://localhost:3001/login" , {
+        const response = await axios.post(`${BACKEND_URL}/login` , {
           username,
           password
         } , {

@@ -1,0 +1,10 @@
+
+services:
+  app:
+    image: harshalso9/excalidraw
+    env_file:
+      - .env.production
+    ports:
+      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:3001:3001"
+      - "127.0.0.1:8080:8080"

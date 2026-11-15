@@ -8,6 +8,7 @@ import RoomsLayout from "@/components/RoomsLayout"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import axios from "axios"
+import { BACKEND_URL } from "@repo/common/secrets"
 
 interface RoomData {
     id: string
@@ -33,7 +34,7 @@ export default function Dashboard() {
     const fetchUserRooms = async () => {
         try {
             setIsLoading(true)
-            const response = await axios.get("http://localhost:3001/get-all-rooms", {
+            const response = await axios.get(`${BACKEND_URL}/get-all-rooms`, {
                 withCredentials: true
             })
             return response.data

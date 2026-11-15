@@ -1,5 +1,5 @@
 {
-  "name": "excali",
+  "name": "excalidraw",
   "private": true,
   "scripts": {
     "start" : "turbo build && turbo start",

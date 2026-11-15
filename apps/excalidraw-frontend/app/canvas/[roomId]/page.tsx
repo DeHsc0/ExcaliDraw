@@ -4,6 +4,7 @@ import Canvas from "@/components/Canvas"
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import axios from "axios"
+import { BACKEND_URL } from "@repo/common/secrets"
 
 export default function CanvasPage(){
 
@@ -45,7 +46,7 @@ export default function CanvasPage(){
         const fetchRoomShapes = async () => {
             try {
                 
-                const response = await axios.post("http://localhost:3001/get-room", {
+                const response = await axios.post(`${BACKEND_URL}/get-room`, {
                     roomId
                 } , {
                     withCredentials: true

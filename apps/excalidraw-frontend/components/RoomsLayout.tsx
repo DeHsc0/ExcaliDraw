@@ -2,6 +2,7 @@ import { Copy, Crown, PenBox, Plus, Users, X } from "lucide-react"
 import { motion, useAnimation } from "framer-motion"
 import axios from "axios"
 import { useState, useEffect } from "react"
+import { BACKEND_URL } from "@repo/common/secrets"
 
 interface RoomData {
     id: string
@@ -36,7 +37,7 @@ export default function RoomsLayout(props : RoomsProps) {
         }
         
         try {
-            const response = await axios.post("http://localhost:3001/create-room", {
+            const response = await axios.post(`${BACKEND_URL}/create-room`, {
                 slug: name,
                 description
             }, {
