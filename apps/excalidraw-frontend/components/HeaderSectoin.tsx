@@ -1,6 +1,6 @@
 "use client"
 
-import {LogOut, Settings , X} from "lucide-react"
+import {LogOut, Settings} from "lucide-react"
 import Cookies from "js-cookie"
 import { useRouter } from "next/navigation"
 

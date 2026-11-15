@@ -1,10 +1,8 @@
 "use client"
 
-import { motion , AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import {ChevronRight , Circle, Diamond, Github, Minus, MousePointer2, MoveUp, Square} from "lucide-react"
 import {useRouter} from "next/navigation"
-import  ToolBar  from "../components/ToolBar"
-import Canvas from "./Canvas"
 
 export default function Hero(){
     const router = useRouter()

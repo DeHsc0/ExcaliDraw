@@ -1,4 +1,4 @@
-import { use, useCallback, useEffect, useRef , useState } from "react"
+import { useCallback, useEffect, useRef , useState } from "react"
 import { useCanvas } from "../hooks/useCanvas"
 import useAllShapes from "../hooks/useAllShapes"
 import { DrawingMode, Shape} from "../types/types"

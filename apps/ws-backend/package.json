@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -b",
-    "dev": "pnpm run build && pnpm run start",
-    "start": "pnpm run build && node dist/index.js"
+    "dev": "tsc -b && node dist/index.js",
+    "start": "tsc -b && node dist/index.js"
   },
   "keywords": [],
   "author": "",

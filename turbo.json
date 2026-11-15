@@ -1,7 +1,18 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalEnv": [
+    "BACKEND_PORT",
+    "BACKEND_URL",
+    "DATABASE_URL",
+    "JWT_SECRET",
+    "NODE_ENV",
+    "WS_URL"
+  ],
   "tasks": {
+    "start" : {
+      "cache" : true
+    },
     "build": {
       "dependsOn": ["^build" , "^db:generate"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],

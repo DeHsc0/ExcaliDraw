@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "pnpm build"
+    "build" : "tsc -b"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

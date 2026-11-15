@@ -2,6 +2,7 @@
   "name": "excali",
   "private": true,
   "scripts": {
+    "start" : "turbo build && turbo start",
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
