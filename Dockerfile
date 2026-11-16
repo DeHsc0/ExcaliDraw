@@ -10,6 +10,6 @@ RUN pnpm install
 
 RUN pnpm dlx turbo run build 
 
-EXPOSE 3000 30001 8080
+EXPOSE 3000 3001 8080
 
-CMD [ "pnpm dlx" , "turbo run" , "start" ]
+CMD [ "pnpm" , "start" ]
